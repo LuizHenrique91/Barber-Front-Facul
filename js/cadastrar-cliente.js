@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const requestOptions = {
             method: 'POST', // Método HTTP (pode ser GET, POST, PUT, DELETE, etc.)
             headers: {
-              'Content-Type': 'application/json' // Tipo de conteúdo do corpo da requisição
+              'Content-Type': 'application/json', // Tipo de conteúdo do corpo da requisição
+              'Authorization': 'Bearer ' + sessionStorage.getItem('token')
             },
             body: JSON.stringify(dadosCliente) // Converte os dados em JSON e os coloca no corpo da requisição
           };
@@ -68,5 +69,5 @@ function exibirConfirmacao() {
         divTeste.remove();
         location.reload();
     }, 5000); // Remove a confirmação após 5 segundos
-  }
+}
         

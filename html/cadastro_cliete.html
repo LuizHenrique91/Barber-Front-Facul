@@ -20,7 +20,7 @@
             <a class="nav-link" href="cadastro_cliete.html">Cadastrar</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="#">Listar Clientes</a>
+              <a class="nav-link" href="lista_de_clientes.html">Listar Clientes</a>
           </li>
         </ul>
       </div>
@@ -39,11 +39,11 @@
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationDefault02">C.P.F</label>
-          <input type="text" class="form-control" id="campoCpf" placeholder="CPF" required>
+          <input type="text" class="form-control" id="campoCpf" placeholder="CPF" required maxlength=11>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationDefault02">Tel.</label>
-          <input type="text" class="form-control" id="campoTelefone" placeholder="Telefone" required>
+          <input type="tel" class="form-control" id="campoTelefone" placeholder="Telefone" required>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationDefaultUsername">E-mail</label>
@@ -51,14 +51,14 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroupPrepend2">@</span>
             </div>
-            <input type="text" class="form-control" id="campoEmail" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
+            <input type="email" class="form-control" id="campoEmail" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
           </div>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-3 mb-3">
           <label for="validationDefault05">CEP</label>
-          <input type="text" class="form-control" id="campoCEP" placeholder="CEP" required>
+          <input type="text" class="form-control" id="campoCEP" placeholder="CEP" maxlength=8 required>
         </div>
         <div class="col-md-3 mb-3">
           <label for="validationDefault05">Logradouro</label>
