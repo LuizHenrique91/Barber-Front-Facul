@@ -1,5 +1,7 @@
 const url = 'http://localhost:8080/customer';
 
+var bootstrapModalEditar = new bootstrap.Modal(modalEditar);
+
 listarClientes();
 
 function listarClientes() {
@@ -52,11 +54,11 @@ function listarClientes() {
                 var botaoClicadoEditar = event.target;
                 var indice = botaoClicadoEditar.getAttribute("data-index");
        
-                buscarPorId(indice);
-
-                var bootstrapModalEditar = new bootstrap.Modal(modalEditar);
+                new bootstrap.Modal(modalEditar);
                 bootstrapModalEditar.show();
-              });
+                
+                buscarPorId(indice);
+              })
 
 
               // Crie um botão de Excluir e adicione-o à coluna cellBotaoExcluir
@@ -147,9 +149,32 @@ function buscarPorId(id){
   })
 }
 
-var botaoAtualizar = document.getElementById('atualizarCliente');
+function exibirConfirmacaoDeAtualizacao() {
+  bootstrapModalEditar.hide();
 
-botaoAtualizar.addEventListener('click', () => {
+  const divTeste = document.getElementById('modalIdAtualizado');
+  divTeste.style.display = 'block';
+
+  var botaoFechar = document.getElementById("botao-fechar");
+
+  //Remova a confirmação após alguns segundos (opcional)
+  setTimeout(function () {
+    divTeste.remove();
+    location.reload();
+}, 5000); // Remove a confirmação após 5 segundos
+
+  console.log("aiaiaia");
+  botaoFechar.addEventListener('click', function (event) {
+      divTeste.remove();
+      location.reload();
+  })
+}
+
+var botaoAtualizar = document.getElementById('atualizarCliente')
+
+botaoAtualizar.addEventListener('click', (event) => {
+  event.preventDefault();
+  
   var idCliente = document.getElementById('campoIdEditar').value;
 
   var dadosCliente = {
@@ -192,24 +217,4 @@ botaoAtualizar.addEventListener('click', () => {
     document.getElementById('textoRespostaAtualizarCliente').textContent = 'Erro ao atualizar o cliente. Sistema indisponível';
     exibirConfirmacaoDeAtualizacao();
   });
-})
-
-
-function exibirConfirmacaoDeAtualizacao() {
-
-  const divTeste = document.getElementById('modalIdAtualizado');
-  divTeste.style.display = 'block';
-
-  var botaoFechar = document.getElementById("botao-fechar");
-
-  botaoFechar.addEventListener('click', function (event) {
-      divTeste.remove();
-      location.reload();
-  })
-
-  // Remova a confirmação após alguns segundos (opcional)
-  setTimeout(function () {
-      divTeste.remove();
-      location.reload();
-  }, 5000); // Remove a confirmação após 5 segundos
-}
+});
