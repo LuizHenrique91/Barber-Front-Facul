@@ -60,14 +60,21 @@ document.addEventListener('DOMContentLoaded', function () {
 });
         
 function exibirConfirmacao() {
-   
-    const divTeste = document.getElementById('modalId');
-    divTeste.style.display = 'block';
 
-    // Remova a confirmação após alguns segundos (opcional)
-    setTimeout(function () {
-        divTeste.remove();
-        location.reload();
-    }, 5000); // Remove a confirmação após 5 segundos
+  const divTeste = document.getElementById('modalId');
+  divTeste.style.display = 'block';
+
+  var botaoFechar = document.getElementById("botao-fechar");
+
+  botaoFechar.addEventListener('click', function (event) {
+      divTeste.remove();
+      location.reload();
+  })
+
+  // Remova a confirmação após alguns segundos (opcional)
+  setTimeout(function () {
+      divTeste.remove();
+      location.reload();
+  }, 5000); // Remove a confirmação após 5 segundos
 }
         

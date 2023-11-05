@@ -1,7 +1,11 @@
 const url = 'http://localhost:8080/customer';
 
+listarClientes();
 
-function mostrarNomes() {
+function listarClientes() {
+
+    var modalExcluir = document.getElementById("ExemploModalCentralizado");
+    var modalEditar = document.getElementById('modalEditar');
 
     var tabelaDados = document.getElementById('tabelaDados');
     tabelaDados.innerHTML = "";
@@ -22,8 +26,6 @@ function mostrarNomes() {
             return response.json(); // Converte a resposta em JSON
           })
           .then(data => {
-            console.log(data)
-            
             for (var i = 0; i < data.length; i++) {
 
               var row = tabelaDados.insertRow();
@@ -44,12 +46,36 @@ function mostrarNomes() {
               buttonEditar.innerHTML = "Editar"; // Texto do botão
               buttonEditar.classList.add("btn");
               buttonEditar.classList.add("btn-outline-primary");
+              buttonEditar.setAttribute("data-index", data[i].id);
+
+              buttonEditar.addEventListener("click", function(event) {
+                var botaoClicadoEditar = event.target;
+                var indice = botaoClicadoEditar.getAttribute("data-index");
+       
+                buscarPorId(indice);
+
+                var bootstrapModalEditar = new bootstrap.Modal(modalEditar);
+                bootstrapModalEditar.show();
+              });
+
 
               // Crie um botão de Excluir e adicione-o à coluna cellBotaoExcluir
               var buttonExcluir = document.createElement("button");
               buttonExcluir.innerHTML = "Excluir"; // Texto do botão
               buttonExcluir.classList.add("btn");
               buttonExcluir.classList.add("btn-outline-danger");
+              buttonExcluir.setAttribute("data-toggle", "modal");
+              buttonExcluir.setAttribute("data-target", "#ExemploModalCentralizado");
+              buttonExcluir.setAttribute("data-index", data[i].id);
+
+              buttonExcluir.addEventListener("click", function(event) {
+                var botaoClicado = event.target;
+                var indice = botaoClicado.getAttribute("data-index");
+            
+                var bootstrapModal = new bootstrap.Modal(modalExcluir);
+                bootstrapModal.show();
+                confirmarExclusao(indice, bootstrapModal)
+              });
               
               cellBotaoEditar.appendChild(buttonEditar);
               cellBotaoExcluir.appendChild(buttonExcluir);
@@ -61,4 +87,129 @@ function mostrarNomes() {
           }); 
 }
 
-mostrarNomes();
+function confirmarExclusao(id, bootstrapModal){
+  var btnConfirmarExclusao  = document.getElementById("excluir-cliente");
+
+  const requestOptions = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    }
+  };
+
+  const urlDelete = url + "/" + id;
+
+  btnConfirmarExclusao.addEventListener("click", function(event) {
+  
+    fetch(urlDelete, requestOptions)
+    .then(res => {
+      bootstrapModal.hide();
+      location.reload()
+    })
+  }); 
+}
+
+function buscarPorId(id){
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    }
+  };
+
+  const urlId = url + "/" + id;
+
+  fetch(urlId, requestOptions)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Erro na requisição'); // Trate erros de resposta aqui
+    }
+    return response.json(); // Converte a resposta em JSON
+  })
+  .then(data => {
+    document.getElementById('campoIdEditar').value = data.id;
+    document.getElementById('campoNomeEditar').value = data.name;
+    document.getElementById('campoSobreNomeEditar').value = data.sobreNome;
+    document.getElementById('campoCpfEditar').value = data.cpf;
+    document.getElementById('campoTelefoneEditar').value = data.telefone;
+    document.getElementById('campoEmailEditar').value = data.email;
+    document.getElementById('campoCEPEditar').value = data.cep;
+    document.getElementById('campoLogradouroEditar').value = data.logradouro;
+    document.getElementById('campoNumeroEditar').value = data.numero;
+    document.getElementById('campoBairroEditar').value = data.bairro;
+    document.getElementById('campoCidadeEditar').value = data.cidade;
+    document.getElementById('campoEstadoEditar').value = data.estado;
+  })
+  .catch(error => {
+
+  })
+}
+
+var botaoAtualizar = document.getElementById('atualizarCliente');
+
+botaoAtualizar.addEventListener('click', () => {
+  var idCliente = document.getElementById('campoIdEditar').value;
+
+  var dadosCliente = {
+    "nome": document.getElementById('campoNomeEditar').value,
+    "cpf": document.getElementById('campoCpfEditar').value,
+    "telefone": document.getElementById('campoTelefoneEditar').value,
+    "sobreNome": document.getElementById('campoSobreNomeEditar').value,
+    "email": document.getElementById('campoEmailEditar').value,
+    "cep": document.getElementById('campoCEPEditar').value,
+    "logradouro":  document.getElementById('campoLogradouroEditar').value,
+    "numero": document.getElementById('campoNumeroEditar').value,
+    "bairro": document.getElementById('campoBairroEditar').value,
+    "cidade": document.getElementById('campoCidadeEditar').value,
+    "estado": document.getElementById('campoEstadoEditar').value,
+  }
+
+  const requestOptions = {
+    method: 'PUT', // Método HTTP (pode ser GET, POST, PUT, DELETE, etc.)
+    headers: {
+      'Content-Type': 'application/json', // Tipo de conteúdo do corpo da requisição
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    },
+    body: JSON.stringify(dadosCliente) // Converte os dados em JSON e os coloca no corpo da requisição
+  };
+
+  const urlIdPut = url + "/" + idCliente;
+
+  fetch(urlIdPut, requestOptions)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Erro na requisição'); // Trate erros de resposta aqui
+    }
+    return response.json(); // Converte a resposta em JSON
+  })
+  .then(data => {
+    document.getElementById('textoRespostaAtualizarCliente').textContent = 'Cliente atualizado com Sucesso';
+    exibirConfirmacaoDeAtualizacao();
+  })
+  .catch(error => {
+    document.getElementById('textoRespostaAtualizarCliente').textContent = 'Erro ao atualizar o cliente. Sistema indisponível';
+    exibirConfirmacaoDeAtualizacao();
+  });
+})
+
+
+function exibirConfirmacaoDeAtualizacao() {
+
+  const divTeste = document.getElementById('modalIdAtualizado');
+  divTeste.style.display = 'block';
+
+  var botaoFechar = document.getElementById("botao-fechar");
+
+  botaoFechar.addEventListener('click', function (event) {
+      divTeste.remove();
+      location.reload();
+  })
+
+  // Remova a confirmação após alguns segundos (opcional)
+  setTimeout(function () {
+      divTeste.remove();
+      location.reload();
+  }, 5000); // Remove a confirmação após 5 segundos
+}

@@ -45,6 +45,115 @@
             </table>
         </div>
 
+        <!-- Modal para excluir cliente-->
+        <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="TituloModalCentralizado">Excluir cliente da base</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja excluir este cliente?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sair</button>
+                <button type="button" id="excluir-cliente" class="btn btn-primary">Excluir</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+         <!-- Modal para editar dados do cliente-->
+         <div class="modal fade bd-example-modal-lg" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <form class="form-cadaster" style="margin: 50px 50px 50px 50px;">
+                    <div class="form-row">
+                      <div class="col-md-4 mb-3">
+                        <label for="validationDefault01">Id</label>
+                        <input type="text" class="form-control" id="campoIdEditar" placeholder="Id" required>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <label for="validationDefault01">Nome</label>
+                        <input type="text" class="form-control" id="campoNomeEditar" placeholder="Nome" required>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <label for="validationDefault02">Sobrenome</label>
+                        <input type="text" class="form-control" id="campoSobreNomeEditar" placeholder="Sobrenome" required>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <label for="validationDefault02">C.P.F</label>
+                        <input type="text" class="form-control" id="campoCpfEditar" placeholder="CPF" required maxlength=11>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <label for="validationDefault02">Tel.</label>
+                        <input type="tel" class="form-control" id="campoTelefoneEditar" placeholder="Telefone" required>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <label for="validationDefaultUsername">E-mail</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                          </div>
+                          <input type="email" class="form-control" id="campoEmailEditar" placeholder="Email" aria-describedby="inputGroupPrepend2" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-3 mb-3">
+                        <label for="validationDefault05">CEP</label>
+                        <input type="text" class="form-control" id="campoCEPEditar" placeholder="CEP" maxlength=8 required>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <label for="validationDefault05">Logradouro</label>
+                        <input type="text" class="form-control" id="campoLogradouroEditar" placeholder="Logradouro" required>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <label for="validationDefault05">Número</label>
+                        <input type="text" class="form-control" id="campoNumeroEditar" placeholder="Numero" required>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="validationDefault03">Bairro</label>
+                        <input type="text" class="form-control" id="campoBairroEditar" placeholder="Bairro" required>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="validationDefault03">Cidade</label>
+                        <input type="text" class="form-control" id="campoCidadeEditar" placeholder="Cidade" required>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <label for="validationDefault04">Estado</label>
+                        <input type="text" class="form-control" id="campoEstadoEditar" placeholder="Estado" required>
+                      </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit" id="atualizarCliente">Enviar</button>
+                  </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal para informar que o cliente foi atualizado --> 
+          <div class="modal" tabindex="-1" role="dialog" id="modalIdAtualizado">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Cadastro de Cliente</h5>
+                  <button type="button" id="botao-fechar" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p id="textoRespostaAtualizarCliente"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="../js/listar-usuarios.js"></script>
     </body>
 </html>
