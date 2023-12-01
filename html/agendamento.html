@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/listar-agendamento.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(página atual)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cadastro_cliete.html">Cadastrar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="lista_de_clientes.html">Listar Clientes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="agendamento.html">Agendamento</a>
+              </li>
+          </ul>
+        </div>
+      </nav>
+
+      <h1 class="tituli-lista-agendamento">Agendar Cliente</h1>
+
+      <form class="tamanhoFormulario" action="">
+        <div class="form-row tamanhoDiv">
+          <div class="tamanhoCampoCpf">
+            <label for="inputCity">CPF</label>
+            <input type="text" class="form-control" id="inputCPFCliente" required>
+          </div>
+          <div class="tamanhoCampoHorario">
+            <label for="inputCEP">Horario</label>
+            <input type="datetime-local" class="form-control" id="inputHorarioCliente" required>
+          </div>
+          <div class="tamanhoCampoFormaPagamento">
+            <label for="inputEstado">Forma de Pagamento</label>
+            <select id="inputFormaPagamento" class="form-control" required>
+              <option selected></option>
+              <option>Cartão de Crédito</option>
+              <option>Cartão de Débito</option>
+              <option>Dinheiro</option>
+              <option>Pix</option>
+            </select>
+          </div>
+          <div class="tamanhoCampoStatusPagamento">
+            <label for="inputEstado">Status Pagamento</label>
+            <select id="inputStatusPagamento" class="form-control">
+              <option selected></option>
+              <option>Pago</option>
+              <option>Aguardando Pagamento</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" id="cadastrarAgendamento">Agendar</button>
+      </form>
+
+      <h1 class="tituli-lista-agendamento">Lista de Agendamentos</h1>
+
+      <div class="table-responsive width-table">
+        <table class="table table-striped table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Horario</th>
+                    <th scope="col">Forma de Pagamento</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaDadosAgendamento">
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para informar que o cliente foi cadastrado --> 
+    <div class="modal" tabindex="-1" role="dialog" id="modalIdAgendamento">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Agendamento de Cliente</h5>
+            <button type="button" id="botao-fechar" class="close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="textoRespostaAgendamento"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/lista-agendamento.js"></script>
+    <script src="../js/agendar-horario.js"></script>
+</body>
+</html>

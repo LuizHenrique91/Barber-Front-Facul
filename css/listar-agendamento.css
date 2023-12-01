@@ -1,0 +1,38 @@
+.tituli-lista-agendamento {
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.width-table {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.tamanhoFormulario {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.tamanhoDiv {
+    margin-bottom: 20px;
+}
+
+.tamanhoCampoCpf {
+    width: 150px;
+    margin-right: 20px;
+}
+
+.tamanhoCampoHorario {
+    width: 200px;
+    margin-right: 20px;
+}
+.tamanhoCampoFormaPagamento {
+    width: 250px;
+    margin-right: 20px;
+}
+
+.tamanhoCampoStatusPagamento {
+    width: 250px;
+    margin-right: 20px
+}
